@@ -5,6 +5,7 @@ import Main from './components/Main';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import NoteState from './context/notes/NoteState';
+import Alert from './components/Alert';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
     <NoteState>
       <Router>
         <Navbar />
+        <Alert message="The Note is deleted successfully" />
         <div className="container">
           <Routes>
             <Route exact path='' element={<Main />}></Route>

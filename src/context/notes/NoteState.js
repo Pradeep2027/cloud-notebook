@@ -2,120 +2,75 @@ import { useState } from "react";
 import NoteContext from "./NoteContext";
 
 export default function NoteState(props)    {
-    const [notes, setNotes] = useState([
-      {
-        "_id": "69ea05e53bb636e0cb012f88",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Wake Up Early",
-        "description": "Wake up early in the morning by 7 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:43:33.160Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06053bb636e0cb012f89",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Sleep Early",
-        "description": "Sleep early in the night by 11 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:44:05.784Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8a",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Keep hydrated",
-        "description": "Drink atleast 3 liters water everyday to stay hydrated.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8b",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Do Meditation",
-        "description": "Perform meditation for about 30 mins daily to stay positive.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea05e53bb636e0cb012f88",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Wake Up Early",
-        "description": "Wake up early in the morning by 7 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:43:33.160Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06053bb636e0cb012f89",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Sleep Early",
-        "description": "Sleep early in the night by 11 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:44:05.784Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8a",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Keep hydrated",
-        "description": "Drink atleast 3 liters water everyday to stay hydrated.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8b",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Do Meditation",
-        "description": "Perform meditation for about 30 mins daily to stay positive.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea05e53bb636e0cb012f88",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Wake Up Early",
-        "description": "Wake up early in the morning by 7 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:43:33.160Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06053bb636e0cb012f89",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Sleep Early",
-        "description": "Sleep early in the night by 11 AM everyday.",
-        "tag": "personal",
-        "date": "2026-04-23T11:44:05.784Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8a",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Keep hydrated",
-        "description": "Drink atleast 3 liters water everyday to stay hydrated.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
-      },
-      {
-        "_id": "69ea06533bb636e0cb012f8b",
-        "user": "69e861e7190ac47dd0d31d62",
-        "title": "Do Meditation",
-        "description": "Perform meditation for about 30 mins daily to stay positive.",
-        "tag": "personal",
-        "date": "2026-04-23T11:45:23.772Z",
-        "__v": 0
+  const host = "http://localhost:5000";
+  
+  const [notes, setNotes] = useState([]);
+  
+  const getAllNotes = async () => {
+    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+      method: "GET",
+      headers: {
+        'Content-Type': "application/json",
+        'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjllODYxZTcxOTBhYzQ3ZGQwZDMxZDYyIn0sImlhdCI6MTc3Njk0NDQ2MH0.45smmCs48PF-Hw8aszAmcRXKUZyf54qIUCBn4o0Jkio"
       }
-    ]);
+    });
+    const json = await response.json();
+    setNotes(json);
+  }
 
-    return (
-        <NoteContext.Provider value={{notes, setNotes}}>
-            {props.children}
-        </NoteContext.Provider>
-    )
+  const addNote = async (title, description, tag) => {
+    const response = await fetch(`${host}/api/notes/addnote`, {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json",
+        'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjllODYxZTcxOTBhYzQ3ZGQwZDMxZDYyIn0sImlhdCI6MTc3Njk0NDQ2MH0.45smmCs48PF-Hw8aszAmcRXKUZyf54qIUCBn4o0Jkio"
+      },
+      body : JSON.stringify({title, description, tag})
+    });
+    const newNote = await response.json();
+    setNotes(notes.concat(newNote));
+  }
+  
+  const deleteNote = async (id) => {
+    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': "application/json",
+        'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjllODYxZTcxOTBhYzQ3ZGQwZDMxZDYyIn0sImlhdCI6MTc3Njk0NDQ2MH0.45smmCs48PF-Hw8aszAmcRXKUZyf54qIUCBn4o0Jkio"
+      }
+    });
+    const updatedNotes = notes.filter((note) => {return note._id!==id});
+    setNotes(updatedNotes);
+  }
+
+  const editNote = async (id, title, description, tag) => {
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': "application/json",
+        'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjllODYxZTcxOTBhYzQ3ZGQwZDMxZDYyIn0sImlhdCI6MTc3Njk0NDQ2MH0.45smmCs48PF-Hw8aszAmcRXKUZyf54qIUCBn4o0Jkio"
+      },
+      body : JSON.stringify({title, description, tag})
+    })
+    console.log("Editing Note with Id : " + id);
+    const json = await response.json();
+    console.log(json);
+    let newNotes = JSON.parse(JSON.stringify(notes));
+    for (let i = 0; i < newNotes.length; i++) {
+      const element = newNotes[i];
+      if (element._id === id) {
+        newNotes[i].title = title;
+        newNotes[i].description = description;
+        newNotes[i].tag = tag;
+        break;
+      }
+    }
+    setNotes(newNotes);
+  }
+
+  return (
+    <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getAllNotes}}>
+      {props.children}
+    </NoteContext.Provider>
+  )
 };
