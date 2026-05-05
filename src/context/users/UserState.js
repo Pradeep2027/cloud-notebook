@@ -1,6 +1,5 @@
-import UserContext from "./UserContext";
-
 import React, { useState } from 'react'
+import UserContext from "./UserContext";
 
 export default function UserState(props)    {
   const host = "http://localhost:5000";
@@ -23,7 +22,7 @@ export default function UserState(props)    {
     // setAuthToken(newUser.au)
   }
   return (
-      <UserContext.Provider value={{authToken, user}}>
+      <UserContext.Provider value={{authToken, user, setUser, setAuthToken, signup}}>
         {props.children}
       </UserContext.Provider>
     )
