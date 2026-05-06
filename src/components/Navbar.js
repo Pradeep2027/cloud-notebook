@@ -21,7 +21,8 @@ export default function Navbar() {
             </li>
           </ul>
           <form className="d-flex" role="search">
-            <a className="btn btn-primary ms-2" href="/signup" role='button'>Signup</a>
+            <Link className="btn btn-primary me-1" to="/login" role='button'>Login</Link>
+            <Link className="btn btn-primary ms-1" to="/signup" role='button'>Signup</Link>
           </form>
         </div>
       </div>

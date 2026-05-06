@@ -8,26 +8,28 @@ import NoteState from './context/notes/NoteState';
 import Alert from './components/Alert';
 import SignUp from './components/SignUp';
 import UserState from './context/users/UserState';
+import Login from './components/Login';
 
 export default function App() {
   return (
     <>
-    <UserState>
-      <NoteState>
-        <Router>
+    <Router>
+      <UserState>
+        <NoteState>
           <Navbar />
-          <Alert message="The Note is deleted successfully" />
+          <Alert type="" message="" />
           <div className="container">
             <Routes>
               <Route exact path='' element={<Main />}></Route>
               <Route exact path='/home' element={<Home />}></Route>
               <Route exact path='/about' element={<About />}></Route>
+              <Route exact path='/login' element={<Login />}></Route>
               <Route exact path='/signup' element={<SignUp />}></Route>
             </Routes>
           </div>
-        </Router>
-      </NoteState>
-    </UserState>
+        </NoteState>
+      </UserState>
+    </Router>
     </>
   );
 }

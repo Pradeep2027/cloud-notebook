@@ -12,6 +12,7 @@ export default function NoteState(props)    {
       headers: {
         'Content-Type': "application/json",
         'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjllODYxZTcxOTBhYzQ3ZGQwZDMxZDYyIn0sImlhdCI6MTc3Njk0NDQ2MH0.45smmCs48PF-Hw8aszAmcRXKUZyf54qIUCBn4o0Jkio"
+        // 'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlmYTM1YzFkNmZlNDM2ODA2ZmE5ZGExIn0sImlhdCI6MTc3ODA3NjExNX0.ggfijVfYz2DnKDXRm58-m3w4QjfVVwIP4Rg28M2ROcg"
       }
     });
     const json = await response.json();

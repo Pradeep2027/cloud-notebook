@@ -44,11 +44,11 @@ export default function Notes() {
               <form>
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">Title</label>
-                  <input type="text" className="form-control" id="etitle" name="etitle" aria-describedby="emailHelp" value={tNote.etitle} onChange={onChange} />
+                  <input type="text" className="form-control" id="etitle" name="etitle" aria-describedby="emailHelp" value={tNote.etitle} onChange={onChange} minLength={3} required />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label"> Description </label>
-                  <input type="text" className="form-control" id="edescription" name="edescription" value={tNote.edescription} onChange={onChange} />
+                  <input type="text" className="form-control" id="edescription" name="edescription" value={tNote.edescription} onChange={onChange} minLength={5} required />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="tag" className="form-label">Tag</label>
@@ -58,14 +58,15 @@ export default function Notes() {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={modalClose}> Cancel </button>
-              <button type="button" className="btn btn-primary" onClick={handleUpdate}> Update Note </button>
+              <button disabled={(tNote.etitle.length < 3) || (tNote.edescription.length < 5)} type="button" className="btn btn-primary" onClick={handleUpdate}> Update Note </button>
             </div>
           </div>
         </div>
       </div>
       <div className="row my-3">
         <h2>Your notes</h2>
-        {notes.map((note) => {
+        {(notes.length === 0) && <h5>No Notes to Display</h5>}
+        { notes.map((note) => {
           return (
             <NoteItem key={note._id} note={note} updateNote={updateNote} />
           );

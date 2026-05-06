@@ -8,7 +8,7 @@ export default function NoteItem(props) {
   const {note, updateNote} = props;
 
   const handleDelete = () => {
-    const confirmed = window.confirm(`Are you sure you want to delete note with id ${note._id}?`);
+    const confirmed = window.confirm(`Are you sure you want to delete note with title ${note.title} ?`);
     if (confirmed)  deleteNote(note._id);
   }
 
