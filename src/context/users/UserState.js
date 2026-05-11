@@ -15,8 +15,14 @@ export default function UserState(props)    {
       },
       body : JSON.stringify({name, email, password})
     });
-    const newUser = await response.json()
-    console.log(newUser);
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem('token', json.authToken);
+      navigate("/");
+    }
+    else {
+      alert(json.error);
+    }
   }
 
   const login = async (email, password) => {
@@ -27,7 +33,7 @@ export default function UserState(props)    {
       },
       body : JSON.stringify({email, password})
     });
-    const json = await response.json()
+    const json = await response.json();
     if (json.success) {
       localStorage.setItem('token', json.authToken);
       navigate("/");
